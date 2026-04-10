@@ -2156,10 +2156,9 @@
             }
         });
 
-        // 表单 AJAX 提交
-        // 通过 FormSubmit (https://formsubmit.co) 中转到目标邮箱，无需后端
-        // 首次提交后，目标邮箱会收到一封激活邮件，点击其中链接激活后即可正常接收所有报名信息
-        const APPLY_ENDPOINT = "https://formsubmit.co/ajax/18030355222@qq.com";
+        // 表单 AJAX 提交：后端接口由本站同域 /api/apply 提供
+        // 后端通过 QQ 邮箱 SMTP 发送到管理员邮箱，详见 server/server.js
+        const APPLY_ENDPOINT = "/api/apply";
 
         function setApplyStatus(message, type) {
             const statusEl = document.getElementById("apply-status");
@@ -2178,12 +2177,9 @@
             const data = {
                 姓名: form.name.value.trim(),
                 联系方式: form.phone.value.trim(),
-                所在城市: form.city.value.trim() || "未填写",
+                所在城市: form.city.value.trim(),
                 目前状态: form.background.value,
-                补充说明: form.intro.value.trim() || "未填写",
-                _subject: "【百万AI动画大师速成班】新报名咨询",
-                _captcha: "false",
-                _template: "table"
+                补充说明: form.intro.value.trim()
             };
 
             if (!data.姓名 || !data.联系方式) {
@@ -2207,7 +2203,7 @@
 
                 const result = await res.json().catch(() => ({}));
 
-                if (res.ok && (result.success === "true" || result.success === true)) {
+                if (res.ok && result.success === true) {
                     setApplyStatus("提交成功！我们会尽快与你联系，建议同步添加咨询微信 Mr-lan1。", "success");
                     form.reset();
                 } else {
