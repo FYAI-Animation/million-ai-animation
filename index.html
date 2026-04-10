@@ -786,16 +786,23 @@
 
         .contact-grid {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(340px, 0.9fr);
-            gap: 24px;
+            grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+            gap: 28px;
+            align-items: start;
         }
 
         .contact-panel {
             background: linear-gradient(180deg, rgba(16, 34, 62, 0.92), rgba(9, 19, 35, 0.94));
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 28px;
-            padding: 30px;
+            padding: 34px;
             box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-panel > .eyebrow {
+            margin-bottom: 14px;
         }
 
         .contact-panel h3 {
@@ -845,7 +852,37 @@
 
         .apply-card {
             display: grid;
+            gap: 18px;
+        }
+
+        .apply-header {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 6px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .apply-header h3 {
+            font-size: 28px;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .apply-header p {
+            color: #adbed6;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        #apply-form {
+            display: grid;
             gap: 16px;
+        }
+
+        #apply-form button[type="submit"] {
+            margin-top: 6px;
+            width: 100%;
         }
 
         .apply-row {
@@ -1900,7 +1937,6 @@
                         </ul>
 
                         <div class="contact-actions">
-                            <a class="btn btn-primary" href="#apply-form">填写下方表单</a>
                             <button class="btn btn-secondary btn-ghost" type="button" data-open-wechat>添加咨询微信</button>
                         </div>
 
@@ -1911,8 +1947,11 @@
 
                     <div class="contact-panel reveal">
                         <div class="apply-card">
-                            <h3>预约职业沟通</h3>
-                            <p>留下你的信息，我们会根据你的基础情况，给你更适合的学习与成长建议。</p>
+                            <div class="apply-header">
+                                <div class="eyebrow">填写信息</div>
+                                <h3>预约职业沟通</h3>
+                                <p>留下你的信息，我们会根据你的基础情况，给你更适合的学习与成长建议。</p>
+                            </div>
                             <form id="apply-form" onsubmit="return handleApply(event)">
                                 <div class="apply-row">
                                     <label for="name">姓名</label>
