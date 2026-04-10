@@ -4,7 +4,8 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "SERVE_STATIC=1 node server.js"
   },
   "dependencies": {
     "dotenv": "^16.4.5",

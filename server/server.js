@@ -3,12 +3,17 @@
 // GET  /api/health 健康检查
 
 require('dotenv').config();
+const path = require('path');
 const express = require('express');
 const nodemailer = require('nodemailer');
 
 const app = express();
 app.disable('x-powered-by');
 app.use(express.json({ limit: '32kb' }));
+
+// 是否处于本地开发模式：无 SMTP 凭证时自动启用 mock，并在需要时托管静态文件
+const SMTP_READY = Boolean(process.env.SMTP_USER && process.env.SMTP_PASS);
+const SERVE_STATIC = process.env.SERVE_STATIC === '1';
 
 // ---------- 简易内存限流：单 IP 每分钟最多 5 次 ----------
 const RL_WINDOW = 60 * 1000;
@@ -40,21 +45,25 @@ function rateLimit(req, res, next) {
 }
 
 // ---------- SMTP ----------
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.qq.com',
-  port: Number(process.env.SMTP_PORT || 465),
-  secure: true,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
+let transporter = null;
+if (SMTP_READY) {
+  transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST || 'smtp.qq.com',
+    port: Number(process.env.SMTP_PORT || 465),
+    secure: true,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+  });
 
-// 启动时验证一次 SMTP 连接，便于排错
-transporter.verify().then(
-  () => console.log('[smtp] ready'),
-  (err) => console.error('[smtp] verify failed:', err.message)
-);
+  transporter.verify().then(
+    () => console.log('[smtp] ready'),
+    (err) => console.error('[smtp] verify failed:', err.message)
+  );
+} else {
+  console.warn('[smtp] SMTP_USER/SMTP_PASS 未配置，进入 mock 模式：邮件内容只会输出到控制台');
+}
 
 // ---------- 工具 ----------
 function escapeHtml(s) {
@@ -116,13 +125,22 @@ app.post('/api/apply', rateLimit, async (req, res) => {
   <p style="margin-top:16px;color:#9aa6bb;font-size:12px">本邮件由站点报名表单自动生成</p>
 </div>`;
 
-    await transporter.sendMail({
-      from: `"百万AI动画速成班" <${process.env.SMTP_USER}>`,
-      to: process.env.TO_EMAIL || process.env.SMTP_USER,
-      subject: `【新报名】${name} - ${phone}`,
-      html,
-      replyTo: process.env.SMTP_USER,
-    });
+    if (transporter) {
+      await transporter.sendMail({
+        from: `"百万AI动画速成班" <${process.env.SMTP_USER}>`,
+        to: process.env.TO_EMAIL || process.env.SMTP_USER,
+        subject: `【新报名】${name} - ${phone}`,
+        html,
+        replyTo: process.env.SMTP_USER,
+      });
+    } else {
+      console.log('\n========== [mock email] ==========');
+      console.log(`时间: ${ts}`);
+      console.log(`收件: ${process.env.TO_EMAIL || '(未配置)'}`);
+      console.log(`主题: 【新报名】${name} - ${phone}`);
+      rows.forEach(([k, v]) => console.log(`  ${k}: ${k === '补充说明' ? v.replace(/<br>/g, ' / ') : v}`));
+      console.log('==================================\n');
+    }
 
     res.json({ success: true, message: '提交成功' });
   } catch (err) {
@@ -131,10 +149,27 @@ app.post('/api/apply', rateLimit, async (req, res) => {
   }
 });
 
-app.get('/api/health', (_req, res) => res.json({ ok: true, ts: Date.now() }));
+app.get('/api/health', (_req, res) => res.json({
+  ok: true,
+  ts: Date.now(),
+  smtp: SMTP_READY ? 'ready' : 'mock',
+}));
+
+// 本地开发：直接由 Node 后端托管整站静态文件，无需另起 web server
+// 触发方式：SERVE_STATIC=1 npm start  或  npm run dev
+if (SERVE_STATIC) {
+  const staticDir = path.resolve(__dirname, '..');
+  console.log(`[static] serving ${staticDir}`);
+  app.use(express.static(staticDir, { extensions: ['html'] }));
+  // SPA fallback：未匹配的路径回到 index.html（但放过 /api/*）
+  app.get(/^\/(?!api\/).*/, (_req, res) => {
+    res.sendFile(path.join(staticDir, 'index.html'));
+  });
+}
 
 const port = Number(process.env.PORT || 3001);
-const host = process.env.HOST || '127.0.0.1';
+const host = process.env.HOST || (SERVE_STATIC ? '0.0.0.0' : '127.0.0.1');
 app.listen(port, host, () => {
   console.log(`[million-ai-api] listening on http://${host}:${port}`);
+  if (SERVE_STATIC) console.log(`[dev] open http://localhost:${port}`);
 });
