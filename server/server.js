@@ -3,6 +3,7 @@
 // GET  /api/health 健康检查
 
 require('dotenv').config();
+const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const nodemailer = require('nodemailer');
@@ -14,6 +15,17 @@ app.use(express.json({ limit: '32kb' }));
 // 是否处于本地开发模式：无 SMTP 凭证时自动启用 mock，并在需要时托管静态文件
 const SMTP_READY = Boolean(process.env.SMTP_USER && process.env.SMTP_PASS);
 const SERVE_STATIC = process.env.SERVE_STATIC === '1';
+
+// 提交记录本地落盘：每条提交先写一行 JSONL，再尝试发邮件
+// 即便 SMTP 临时挂掉也不会丢数据，事后可以人工补发
+const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
+const APPLICATIONS_LOG = path.join(DATA_DIR, 'applications.jsonl');
+fs.mkdirSync(DATA_DIR, { recursive: true });
+console.log(`[backup] applications log: ${APPLICATIONS_LOG}`);
+
+function appendApplication(record) {
+  fs.appendFileSync(APPLICATIONS_LOG, JSON.stringify(record) + '\n', 'utf8');
+}
 
 // ---------- 简易内存限流：单 IP 每分钟最多 5 次 ----------
 const RL_WINDOW = 60 * 1000;
@@ -125,35 +137,69 @@ app.post('/api/apply', rateLimit, async (req, res) => {
   <p style="margin-top:16px;color:#9aa6bb;font-size:12px">本邮件由站点报名表单自动生成</p>
 </div>`;
 
-    if (transporter) {
-      await transporter.sendMail({
-        from: `"百万AI动画速成班" <${process.env.SMTP_USER}>`,
-        to: process.env.TO_EMAIL || process.env.SMTP_USER,
-        subject: `【新报名】${name} - ${phone}`,
-        html,
-        replyTo: process.env.SMTP_USER,
+    // 1) 先落盘备份 — 这是数据安全的底线，写失败才视为请求失败
+    try {
+      appendApplication({
+        ts,
+        name,
+        phone,
+        city,
+        background,
+        intro,
+        ip,
+        userAgent: req.headers['user-agent'] || '',
       });
-    } else {
-      console.log('\n========== [mock email] ==========');
-      console.log(`时间: ${ts}`);
-      console.log(`收件: ${process.env.TO_EMAIL || '(未配置)'}`);
-      console.log(`主题: 【新报名】${name} - ${phone}`);
-      rows.forEach(([k, v]) => console.log(`  ${k}: ${k === '补充说明' ? v.replace(/<br>/g, ' / ') : v}`));
-      console.log('==================================\n');
+    } catch (writeErr) {
+      console.error('[backup] write failed:', writeErr);
+      return res.status(500).json({ success: false, message: '服务异常，请稍后再试' });
     }
 
-    res.json({ success: true, message: '提交成功' });
+    // 2) 再发邮件 — 失败也不影响返回成功，数据已经安全落盘
+    let mailDelivered = true;
+    try {
+      if (transporter) {
+        await transporter.sendMail({
+          from: `"百万AI动画速成班" <${process.env.SMTP_USER}>`,
+          to: process.env.TO_EMAIL || process.env.SMTP_USER,
+          subject: `【新报名】${name} - ${phone}`,
+          html,
+          replyTo: process.env.SMTP_USER,
+        });
+      } else {
+        console.log('\n========== [mock email] ==========');
+        console.log(`时间: ${ts}`);
+        console.log(`收件: ${process.env.TO_EMAIL || '(未配置)'}`);
+        console.log(`主题: 【新报名】${name} - ${phone}`);
+        rows.forEach(([k, v]) => console.log(`  ${k}: ${k === '补充说明' ? v.replace(/<br>/g, ' / ') : v}`));
+        console.log('==================================\n');
+      }
+    } catch (mailErr) {
+      mailDelivered = false;
+      console.error('[apply] mail send failed (data saved to jsonl):', mailErr.message);
+    }
+
+    res.json({ success: true, message: '提交成功', mailDelivered });
   } catch (err) {
     console.error('[apply] error:', err);
     res.status(500).json({ success: false, message: '服务异常，请稍后再试' });
   }
 });
 
-app.get('/api/health', (_req, res) => res.json({
-  ok: true,
-  ts: Date.now(),
-  smtp: SMTP_READY ? 'ready' : 'mock',
-}));
+app.get('/api/health', (_req, res) => {
+  let count = 0;
+  try {
+    if (fs.existsSync(APPLICATIONS_LOG)) {
+      const stat = fs.statSync(APPLICATIONS_LOG);
+      count = stat.size; // 字节数即可，避免遍历
+    }
+  } catch (_) { /* noop */ }
+  res.json({
+    ok: true,
+    ts: Date.now(),
+    smtp: SMTP_READY ? 'ready' : 'mock',
+    backupBytes: count,
+  });
+});
 
 // 本地开发：直接由 Node 后端托管整站静态文件，无需另起 web server
 // 触发方式：SERVE_STATIC=1 npm start  或  npm run dev

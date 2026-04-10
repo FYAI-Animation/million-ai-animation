@@ -122,9 +122,13 @@ mkdir -p "$API_DIR"
 rsync -a --delete \
   --exclude='node_modules' \
   --exclude='.env' \
+  --exclude='data' \
   "$REPO_DIR/server/" "$API_DIR/"
 cp "$REPO_DIR/server/.env" "$API_DIR/.env"
 chmod 600 "$API_DIR/.env"
+
+# 提交记录落盘目录（不会被 rsync --delete 清掉，因为不在 source 里）
+mkdir -p "$API_DIR/data"
 
 cd "$API_DIR"
 info "npm install"
@@ -154,6 +158,7 @@ NoNewPrivileges=true
 ProtectSystem=full
 ProtectHome=true
 PrivateTmp=true
+ReadWritePaths=${API_DIR}/data
 
 [Install]
 WantedBy=multi-user.target
