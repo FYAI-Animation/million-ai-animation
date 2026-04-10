@@ -1,0 +1,1929 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百万AI动画大师速成班 | 成都丰羽未来信息技术有限公司</title>
+    <meta name="description" content="百万AI动画大师速成班，由成都丰羽未来信息技术有限公司推出。面向零基础与转行人群，提供真实项目训练、带薪培养计划与岗位晋升路径。">
+    <style>
+        :root {
+            --bg: #08111f;
+            --bg-soft: #0f1c31;
+            --panel: rgba(12, 24, 43, 0.78);
+            --panel-strong: #10223e;
+            --line: rgba(255, 255, 255, 0.1);
+            --text: #eef4ff;
+            --muted: #9db0ce;
+            --gold: #d9b979;
+            --gold-soft: rgba(217, 185, 121, 0.18);
+            --teal: #6fd0d7;
+            --teal-soft: rgba(111, 208, 215, 0.16);
+            --shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+            --radius-xl: 30px;
+            --radius-lg: 22px;
+            --radius-md: 16px;
+            --container: 1220px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(111, 208, 215, 0.12), transparent 30%),
+                radial-gradient(circle at 85% 10%, rgba(217, 185, 121, 0.14), transparent 30%),
+                linear-gradient(180deg, #07101e 0%, #0a1324 38%, #08111f 100%);
+            min-height: 100vh;
+            line-height: 1.65;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        .page-shell::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 72px 72px;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.45), transparent 85%);
+            z-index: 0;
+        }
+
+        .container {
+            width: min(var(--container), calc(100% - 40px));
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(217, 185, 121, 0.24);
+            background: rgba(217, 185, 121, 0.08);
+            color: #f5deb2;
+            font-size: 13px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 18px rgba(217, 185, 121, 0.7);
+        }
+
+        .topbar {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(5, 11, 20, 0.72);
+            backdrop-filter: blur(18px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            min-height: 84px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+        }
+
+        .brand-mark {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            background:
+                linear-gradient(135deg, rgba(217, 185, 121, 0.24), rgba(111, 208, 215, 0.18)),
+                #0f1b2f;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            font-weight: 700;
+            color: #f7e2b6;
+        }
+
+        .brand-meta {
+            min-width: 0;
+        }
+
+        .brand-name {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .brand-subtitle {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 2px;
+            letter-spacing: 0.04em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+            list-style: none;
+            color: #c8d4e8;
+            font-size: 14px;
+        }
+
+        .nav-links a {
+            transition: color 0.2s ease, opacity 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            padding: 14px 22px;
+            color: #08111f;
+            background: linear-gradient(135deg, #f0d39a 0%, #d9b979 100%);
+            box-shadow: 0 14px 34px rgba(217, 185, 121, 0.22);
+        }
+
+        .btn-secondary {
+            padding: 14px 22px;
+            color: #edf3ff;
+            border-color: rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .hero {
+            padding: 56px 0 44px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.16fr) minmax(340px, 0.84fr);
+            gap: 34px;
+            align-items: stretch;
+        }
+
+        .hero-copy {
+            padding: 18px 0 8px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 6vw, 74px);
+            line-height: 1.03;
+            letter-spacing: -0.04em;
+            max-width: 760px;
+            margin: 18px 0 18px;
+        }
+
+        .hero h1 span {
+            color: #f0d39a;
+        }
+
+        .hero-lead {
+            max-width: 680px;
+            color: #c7d4e8;
+            font-size: 18px;
+            line-height: 1.9;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .hero-points {
+            margin-top: 26px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            max-width: 720px;
+        }
+
+        .hero-point {
+            padding: 16px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.03);
+            color: #d5e2f4;
+            font-size: 14px;
+        }
+
+        .hero-point strong {
+            display: block;
+            color: #ffffff;
+            font-size: 17px;
+            margin-bottom: 6px;
+        }
+
+        .hero-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 32px;
+            padding: 24px;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03)),
+                linear-gradient(180deg, rgba(14, 26, 47, 0.96), rgba(10, 19, 35, 0.96));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            inset: auto -20% -30% auto;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(111, 208, 215, 0.18), transparent 66%);
+        }
+
+        .card-topline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .card-tag {
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(111, 208, 215, 0.12);
+            color: #90e3e8;
+            border: 1px solid rgba(111, 208, 215, 0.16);
+            font-size: 12px;
+        }
+
+        .card-status {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .card-title {
+            font-size: 30px;
+            line-height: 1.15;
+            margin-bottom: 10px;
+            max-width: 420px;
+        }
+
+        .card-description {
+            color: #b0c2db;
+            font-size: 15px;
+            max-width: 420px;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin: 28px 0;
+        }
+
+        .stat-box {
+            padding: 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-box strong {
+            display: block;
+            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .stat-box span {
+            font-size: 13px;
+            color: #9fb0c9;
+        }
+
+        .timeline-mini {
+            display: grid;
+            gap: 14px;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 44px 1fr;
+            gap: 14px;
+            align-items: start;
+        }
+
+        .timeline-badge {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, rgba(240, 211, 154, 0.25), rgba(217, 185, 121, 0.1));
+            border: 1px solid rgba(240, 211, 154, 0.18);
+            color: #f1d39a;
+            font-weight: 700;
+        }
+
+        .timeline-item strong {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+
+        .timeline-item p {
+            color: #9db0ce;
+            font-size: 13px;
+        }
+
+        .trust-strip {
+            padding: 24px 0 14px;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .trust-card {
+            padding: 22px 20px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .trust-card .label {
+            color: #88d6dc;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 10px;
+        }
+
+        .trust-card strong {
+            display: block;
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+        .trust-card p {
+            font-size: 14px;
+            color: #a7b7ce;
+        }
+
+        section {
+            padding: 76px 0;
+        }
+
+        .section-heading {
+            max-width: 760px;
+            margin-bottom: 34px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(30px, 4.6vw, 52px);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin: 16px 0 12px;
+        }
+
+        .section-heading p {
+            color: #a9bbd3;
+            font-size: 17px;
+        }
+
+        .dual-panel {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+            gap: 24px;
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-xl);
+            padding: 28px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(18px);
+        }
+
+        .panel h3 {
+            font-size: 28px;
+            margin-bottom: 14px;
+            line-height: 1.2;
+        }
+
+        .panel p {
+            color: #aec0d8;
+            font-size: 15px;
+        }
+
+        .model-list {
+            display: grid;
+            gap: 14px;
+            margin-top: 24px;
+        }
+
+        .model-item {
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            gap: 16px;
+            padding: 18px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .model-index {
+            width: 56px;
+            height: 56px;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, rgba(111, 208, 215, 0.18), rgba(111, 208, 215, 0.06));
+            color: #98eef2;
+            font-weight: 700;
+        }
+
+        .model-item strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 18px;
+        }
+
+        .metric-board {
+            display: grid;
+            gap: 14px;
+        }
+
+        .metric-box {
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .metric-box strong {
+            font-size: 34px;
+            display: block;
+            color: #f0d39a;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .metric-box span {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .metric-box p {
+            font-size: 13px;
+            color: #9db0ce;
+        }
+
+        .path-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .path-card {
+            position: relative;
+            padding: 24px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+
+        .path-card::before {
+            content: "";
+            position: absolute;
+            inset: auto -30px -50px auto;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(217, 185, 121, 0.14), transparent 65%);
+        }
+
+        .path-step {
+            color: #88d6dc;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .path-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            line-height: 1.15;
+        }
+
+        .path-card p {
+            color: #a7b7ce;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .path-card ul {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .path-card li {
+            position: relative;
+            padding-left: 18px;
+            color: #dbe6f7;
+            font-size: 14px;
+        }
+
+        .path-card li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .curriculum-card {
+            padding: 24px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            min-height: 260px;
+        }
+
+        .curriculum-card .module-label {
+            display: inline-flex;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: rgba(217, 185, 121, 0.1);
+            color: #f1d39a;
+            font-size: 12px;
+            margin-bottom: 18px;
+        }
+
+        .curriculum-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .curriculum-card p {
+            color: #adbed6;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .curriculum-card ul {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .curriculum-card li {
+            color: #dbe6f7;
+            font-size: 14px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .curriculum-card li::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #6fd0d7;
+            position: absolute;
+            left: 0;
+            top: 9px;
+        }
+
+        .stories-note {
+            margin-top: -8px;
+            margin-bottom: 28px;
+            color: #8ea3c4;
+            font-size: 13px;
+        }
+
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .story-card {
+            overflow: hidden;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: var(--shadow);
+        }
+
+        .story-photo {
+            aspect-ratio: 4 / 4.5;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(217, 185, 121, 0.15), rgba(111, 208, 215, 0.12));
+        }
+
+        .story-photo img {
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .story-body {
+            padding: 24px;
+        }
+
+        .story-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .story-meta h3 {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+
+        .story-meta span {
+            color: #9bb0cd;
+            font-size: 13px;
+        }
+
+        .story-tag {
+            flex-shrink: 0;
+            align-self: start;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(111, 208, 215, 0.12);
+            color: #8fe1e7;
+            font-size: 12px;
+        }
+
+        .story-stats {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin: 16px 0;
+        }
+
+        .story-stat {
+            padding: 14px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .story-stat strong {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .story-stat span {
+            display: block;
+            color: #9db0ce;
+            font-size: 12px;
+        }
+
+        .story-quote {
+            color: #dce7f8;
+            font-size: 14px;
+        }
+
+        .fit-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .fit-card {
+            padding: 24px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .fit-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .fit-card p {
+            font-size: 14px;
+            color: #a9bbd3;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(340px, 0.9fr);
+            gap: 24px;
+        }
+
+        .contact-panel {
+            background: linear-gradient(180deg, rgba(16, 34, 62, 0.92), rgba(9, 19, 35, 0.94));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 28px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-panel h3 {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .contact-panel p {
+            color: #adbed6;
+            margin-bottom: 20px;
+        }
+
+        .contact-list {
+            list-style: none;
+            display: grid;
+            gap: 14px;
+            margin-bottom: 26px;
+        }
+
+        .contact-list li {
+            padding: 16px 18px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .contact-list strong {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 3px;
+        }
+
+        .contact-list span {
+            color: #97acc9;
+            font-size: 13px;
+        }
+
+        .contact-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .btn-ghost {
+            background: transparent;
+        }
+
+        .apply-card {
+            display: grid;
+            gap: 16px;
+        }
+
+        .apply-row {
+            display: grid;
+            gap: 8px;
+        }
+
+        .apply-row label {
+            color: #dbe7f8;
+            font-size: 13px;
+        }
+
+        .apply-row input,
+        .apply-row textarea,
+        .apply-row select {
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #eef4ff;
+            padding: 14px 16px;
+            font: inherit;
+            outline: none;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .apply-row input:focus,
+        .apply-row textarea:focus,
+        .apply-row select:focus {
+            border-color: rgba(217, 185, 121, 0.45);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .apply-row textarea {
+            min-height: 124px;
+            resize: vertical;
+        }
+
+        .disclaimer {
+            margin-top: 16px;
+            color: #8ea3c4;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .faq-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(3, 7, 14, 0.72);
+            backdrop-filter: blur(10px);
+            z-index: 120;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-dialog {
+            width: min(460px, 100%);
+            border-radius: 28px;
+            background: linear-gradient(180deg, rgba(18, 35, 63, 0.98), rgba(8, 17, 31, 0.98));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.36);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 20px 22px 12px;
+        }
+
+        .modal-header h3 {
+            font-size: 22px;
+        }
+
+        .modal-close {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 0;
+            background: rgba(255, 255, 255, 0.06);
+            color: #eef4ff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 0 22px 24px;
+        }
+
+        .wechat-hint {
+            color: #f0d39a;
+            font-size: 15px;
+            margin-bottom: 16px;
+        }
+
+        .wechat-qr-wrap {
+            padding: 18px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .wechat-qr-wrap img {
+            border-radius: 18px;
+            background: #fff;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        .faq-item {
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: transparent;
+            border: 0;
+            color: #eef4ff;
+            font: inherit;
+            padding: 20px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .faq-question strong {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .faq-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: rgba(217, 185, 121, 0.12);
+            color: #f0d39a;
+            flex-shrink: 0;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.28s ease;
+        }
+
+        .faq-answer-inner {
+            padding: 0 22px 22px;
+            color: #a8bad3;
+            font-size: 15px;
+        }
+
+        .cta-banner {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 18px;
+            align-items: center;
+            padding: 34px;
+            border-radius: 30px;
+            background:
+                linear-gradient(135deg, rgba(217, 185, 121, 0.16), rgba(111, 208, 215, 0.14)),
+                rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: var(--shadow);
+        }
+
+        .cta-banner h2 {
+            font-size: clamp(30px, 4.5vw, 46px);
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+
+        .cta-banner p {
+            color: #b5c7de;
+            font-size: 16px;
+        }
+
+        footer {
+            padding: 28px 0 44px;
+            color: #89a0be;
+            font-size: 13px;
+        }
+
+        .footer-line {
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            flex-wrap: wrap;
+            padding-top: 22px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 1120px) {
+            .hero-grid,
+            .dual-panel,
+            .contact-grid,
+            .curriculum-grid,
+            .stories-grid,
+            .fit-grid,
+            .path-grid,
+            .trust-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .curriculum-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .stories-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .fit-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 860px) {
+            .nav {
+                flex-wrap: wrap;
+                padding: 14px 0;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: space-between;
+                gap: 14px;
+                flex-wrap: wrap;
+            }
+
+            .hero-grid,
+            .dual-panel,
+            .trust-grid,
+            .path-grid,
+            .curriculum-grid,
+            .stories-grid,
+            .fit-grid,
+            .cta-banner {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-points,
+            .hero-stats,
+            .story-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 34px;
+            }
+
+            .cta-banner {
+                padding: 26px;
+            }
+
+            .cta-banner .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .container {
+                width: min(var(--container), calc(100% - 26px));
+            }
+
+            .brand-name {
+                white-space: normal;
+            }
+
+            .hero h1 {
+                letter-spacing: -0.05em;
+            }
+
+            .panel,
+            .contact-panel,
+            .hero-card,
+            .story-body,
+            .curriculum-card,
+            .path-card,
+            .fit-card {
+                padding: 22px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <header class="topbar">
+            <div class="container nav">
+                <a class="brand" href="#top">
+                    <div class="brand-mark">FY</div>
+                    <div class="brand-meta">
+                        <div class="brand-name">成都丰羽未来信息技术有限公司</div>
+                        <div class="brand-subtitle">百万AI动画大师速成班</div>
+                    </div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#model">项目优势</a></li>
+                    <li><a href="#path">培养路径</a></li>
+                    <li><a href="#stories">学员故事</a></li>
+                    <li><a href="#faq">常见问题</a></li>
+                </ul>
+                <a class="btn btn-primary" href="#apply">预约咨询</a>
+            </div>
+        </header>
+
+        <main id="top">
+            <section class="hero">
+                <div class="container hero-grid">
+                    <div class="hero-copy reveal">
+                        <div class="eyebrow">AI 内容新职业入口</div>
+                        <h1>当传统岗位越来越难，<span>AI 动画短剧正在打开一条新的高收入通道。</span></h1>
+                        <p class="hero-lead">
+                            越来越多人正在经历同一件事：工作越来越难找，工资越来越难涨，原有技能的价值也在快速下降。
+                            但另一边，会用 AI 做动画短剧、能稳定产出内容的人，正在成为市场里的新需求。百万AI动画大师速成班，
+                            就是帮你尽快切进这个新职业赛道，从零基础到进入项目、进入团队、进入更高收入区间。
+                        </p>
+                        <div class="hero-actions">
+                            <a class="btn btn-primary" href="#apply">申请入班</a>
+                            <a class="btn btn-secondary" href="#path">查看培养路径</a>
+                        </div>
+                        <div class="hero-points">
+                            <div class="hero-point">
+                                <strong>培养期补助 4000 元 / 月</strong>
+                                通过阶段筛选后进入项目培养，在真实业务环境中边练边做边成长。
+                            </div>
+                            <div class="hero-point">
+                                <strong>正式岗位 8000+ 提成</strong>
+                                考核通过后进入正式团队，优秀者继续向组长、主管方向晋升。
+                            </div>
+                            <div class="hero-point">
+                                <strong>行业正处在爆发早期</strong>
+                                现在进入的人，拿到的不只是技能，更是未来几年内容产业升级带来的位置。
+                            </div>
+                            <div class="hero-point">
+                                <strong>零基础也能切进新赛道</strong>
+                                不要求科班出身，更看重执行力、学习速度、审美理解和持续投入能力。
+                            </div>
+                        </div>
+                    </div>
+
+                    <aside class="hero-card reveal">
+                        <div class="card-topline">
+                            <span class="card-tag">2026 招募批次</span>
+                            <span class="card-status">先入场的人先占位</span>
+                        </div>
+                        <h2 class="card-title">越早进入，越容易站上 AI 内容岗位的红利期。</h2>
+                        <p class="card-description">
+                            过去很多岗位拼资历，接下来很多岗位拼的是 AI 生产力。谁能更快掌握一整套内容生产流程，谁就更容易拿到新机会。
+                        </p>
+
+                        <div class="hero-stats">
+                            <div class="stat-box">
+                                <strong>4 阶段</strong>
+                                <span>测评入营、速成训练、项目培养、正式晋升</span>
+                            </div>
+                            <div class="stat-box">
+                                <strong>6 个月</strong>
+                                <span>项目培养窗口，持续打磨交付能力与效率</span>
+                            </div>
+                            <div class="stat-box">
+                                <strong>8000+</strong>
+                                <span>主管方向月度方案示意，可叠加项目提成</span>
+                            </div>
+                            <div class="stat-box">
+                                <strong>1 分钟</strong>
+                                <span>内容按交付单元核算，更适合规模化生产</span>
+                            </div>
+                        </div>
+
+                        <div class="timeline-mini">
+                            <div class="timeline-item">
+                                <div class="timeline-badge">01</div>
+                                <div>
+                                    <strong>入营测评</strong>
+                                    <p>基础沟通、执行力测试、审美判断与软件适应能力初筛。</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-badge">02</div>
+                                <div>
+                                    <strong>速成训练</strong>
+                                    <p>快速建立完整工作流认知，掌握一个人独立完成片段的能力。</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-badge">03</div>
+                                <div>
+                                    <strong>项目培养</strong>
+                                    <p>在主管带教下进入真实项目，按标准逐步放量、提效、稳定交付。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+
+            <section class="trust-strip">
+                <div class="container trust-grid">
+                    <div class="trust-card reveal">
+                        <div class="label">行业机会</div>
+                        <strong>AI 正在重做内容行业</strong>
+                        <p>很多传统岗位在收缩，但会用 AI 做内容、会稳定交付的人正在快速变得更值钱。</p>
+                    </div>
+                    <div class="trust-card reveal">
+                        <div class="label">技能价值</div>
+                        <strong>学的是可变现的生产能力</strong>
+                        <p>不是只学一个软件，而是学会从分镜到成片的一整套 AI 动画短剧工作流。</p>
+                    </div>
+                    <div class="trust-card reveal">
+                        <div class="label">收入空间</div>
+                        <strong>从补助到正式岗再到带队提成</strong>
+                        <p>先进入项目培养，再向正式团队和主管方向成长，收入结构和成长天花板都更清晰。</p>
+                    </div>
+                    <div class="trust-card reveal">
+                        <div class="label">成长路径</div>
+                        <strong>不是学完就散，而是一路走进团队</strong>
+                        <p>速成训练、项目培养、正式岗位、主管晋升，每一步都围绕真实职业结果展开。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="model">
+                <div class="container">
+                    <div class="section-heading reveal">
+                        <div class="eyebrow">项目优势</div>
+                        <h2>AI 不会淘汰所有人，但会淘汰不会用 AI 的人</h2>
+                        <p>
+                            当越来越多人开始焦虑找工作难、涨薪难、转行难时，真正值得关注的不是焦虑本身，而是下一批能被市场持续需要的新技能。
+                            AI 动画短剧，就是当下内容行业里最值得抢跑的方向之一。
+                        </p>
+                    </div>
+
+                    <div class="dual-panel">
+                        <div class="panel reveal">
+                            <h3>很多岗位在收缩，会做 AI 内容的人却在变得稀缺。</h3>
+                            <p>
+                                这门课不是把你带去听一堆空洞概念，而是把你带进一条更接近结果的成长路线：先学技能，再进项目，再进团队，
+                                用实际产出证明自己，让能力真正变成岗位机会和收入机会。
+                            </p>
+                            <div class="model-list">
+                                <div class="model-item">
+                                    <div class="model-index">A</div>
+                                    <div>
+                                        <strong>先把技能学到手</strong>
+                                        <p>从镜头、角色、生成、剪辑到交付逻辑，先建立一整套能落地的工作能力。</p>
+                                    </div>
+                                </div>
+                                <div class="model-item">
+                                    <div class="model-index">B</div>
+                                    <div>
+                                        <strong>再把能力练成产能</strong>
+                                        <p>在项目培养中反复练速度、稳定性、返工控制和交付标准，真正把能力练扎实。</p>
+                                    </div>
+                                </div>
+                                <div class="model-item">
+                                    <div class="model-index">C</div>
+                                    <div>
+                                        <strong>最后把结果做成职业通道</strong>
+                                        <p>通过考核进入正式团队，优秀者继续带人、管项目、拿提成，收入和位置一起往上走。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel reveal">
+                            <h3>报名前，大多数人最看重的就是这三件事</h3>
+                            <div class="metric-board">
+                                <div class="metric-box">
+                                    <strong>01</strong>
+                                    <span>值不值得学</span>
+                                    <p>学的不是噱头，而是未来内容岗位里越来越核心的 AI 生产能力。</p>
+                                </div>
+                                <div class="metric-box">
+                                    <strong>02</strong>
+                                    <span>能不能变现</span>
+                                    <p>不是停留在课堂里，而是继续进入项目、进入团队、进入真实岗位路径。</p>
+                                </div>
+                                <div class="metric-box">
+                                    <strong>03</strong>
+                                    <span>有没有发展空间</span>
+                                    <p>从制作执行到正式岗位，再到带队管理，成长路径和收入空间都更大。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="path">
+                <div class="container">
+                    <div class="section-heading reveal">
+                        <div class="eyebrow">培养路径</div>
+                        <h2>从零基础到进入团队，这条路不是碰运气，而是一步一步练出来的</h2>
+                        <p>
+                            如果你现在正焦虑未来做什么、学什么、靠什么涨收入，这条路径给你的不是一句空话，
+                            而是一套从训练到上岗再到晋升的完整答案。
+                        </p>
+                    </div>
+
+                    <div class="path-grid">
+                        <article class="path-card reveal">
+                            <div class="path-step">Step 01</div>
+                            <h3>入班测评</h3>
+                            <p>面向零基础、转行者和想进入 AI 动画行业的人群，先做筛选，不盲目扩招。</p>
+                            <ul>
+                                <li>基础审美与理解力测试</li>
+                                <li>软件适应能力与执行力判断</li>
+                                <li>明确投入时间与成长预期</li>
+                            </ul>
+                        </article>
+
+                        <article class="path-card reveal">
+                            <div class="path-step">Step 02</div>
+                            <h3>速成训练</h3>
+                            <p>快速建立完整工作流概念，先学会做出一个完整片段，再谈效率和产能。</p>
+                            <ul>
+                                <li>工具链上手与标准流程</li>
+                                <li>角色、场景、镜头一致性训练</li>
+                                <li>作业批改与试片复盘</li>
+                            </ul>
+                        </article>
+
+                        <article class="path-card reveal">
+                            <div class="path-step">Step 03</div>
+                            <h3>项目培养期</h3>
+                            <p>进入 6 个月项目化培养阶段，按真实交付标准成长，培养期补助 4000 元 / 月。</p>
+                            <ul>
+                                <li>主管带教与项目拆解</li>
+                                <li>从单点执行到整段交付</li>
+                                <li>建立质量、速度和稳定性</li>
+                            </ul>
+                        </article>
+
+                        <article class="path-card reveal">
+                            <div class="path-step">Step 04</div>
+                            <h3>正式晋升</h3>
+                            <p>考核通过后进入正式制作团队，优秀者向主管序列发展，月度方案 8000 元起并叠加项目提成。</p>
+                            <ul>
+                                <li>正式岗位与项目分配</li>
+                                <li>主管带队与新人培养</li>
+                                <li>团队扩张中的长期位置</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="curriculum">
+                <div class="container">
+                    <div class="section-heading reveal">
+                        <div class="eyebrow">课程内容</div>
+                        <h2>你要学的，不是一个软件，而是一整套能赚钱的 AI 内容生产能力</h2>
+                        <p>
+                            未来最值钱的人，不是知道一点 AI 的人，而是能用 AI 稳定做出结果的人。
+                            所以课程的每一部分，都是围绕真实工作流和真实交付场景设计的。
+                        </p>
+                    </div>
+
+                    <div class="curriculum-grid">
+                        <article class="curriculum-card reveal">
+                            <div class="module-label">模块 01</div>
+                            <h3>项目认知与岗位逻辑</h3>
+                            <p>先理解一部 AI 动画短剧是如何被拆解、分工和交付的，建立生产体系认知。</p>
+                            <ul>
+                                <li>项目结构与角色分工</li>
+                                <li>交付标准与返工逻辑</li>
+                                <li>团队协作节奏</li>
+                            </ul>
+                        </article>
+
+                        <article class="curriculum-card reveal">
+                            <div class="module-label">模块 02</div>
+                            <h3>分镜与镜头表达</h3>
+                            <p>镜头好不好，不是运气，而是表达是否清楚、节奏是否稳定、信息是否有效。</p>
+                            <ul>
+                                <li>分镜拆解与节奏判断</li>
+                                <li>情绪镜头与叙事推进</li>
+                                <li>镜头连续性与转场统一</li>
+                            </ul>
+                        </article>
+
+                        <article class="curriculum-card reveal">
+                            <div class="module-label">模块 03</div>
+                            <h3>AI 出图与角色一致性</h3>
+                            <p>学会把角色、场景、道具和画风稳定下来，这是 AI 动画最核心的制作壁垒之一。</p>
+                            <ul>
+                                <li>角色设定与提示词拆解</li>
+                                <li>风格控制与一致性维护</li>
+                                <li>场景资产复用</li>
+                            </ul>
+                        </article>
+
+                        <article class="curriculum-card reveal">
+                            <div class="module-label">模块 04</div>
+                            <h3>生成、补帧与后期整合</h3>
+                            <p>真正的可交付片段，一定是生成、修正、合成、音效、字幕共同完成的结果。</p>
+                            <ul>
+                                <li>素材生成与镜头细修</li>
+                                <li>后期节奏与情绪处理</li>
+                                <li>字幕、配音与包装统一</li>
+                            </ul>
+                        </article>
+
+                        <article class="curriculum-card reveal">
+                            <div class="module-label">模块 05</div>
+                            <h3>质检与交付效率</h3>
+                            <p>从单纯会做，到能够稳定做、按时做、少返工地做，这是职业化的分水岭。</p>
+                            <ul>
+                                <li>交付清单与质量核验</li>
+                                <li>返工类型复盘</li>
+                                <li>流程提速方法</li>
+                            </ul>
+                        </article>
+
+                        <article class="curriculum-card reveal">
+                            <div class="module-label">模块 06</div>
+                            <h3>项目实训与岗位适配</h3>
+                            <p>通过真实试片与项目任务，看一个人是否具备稳定进入团队的能力。</p>
+                            <ul>
+                                <li>试片制作与讲评</li>
+                                <li>岗位匹配与分工定位</li>
+                                <li>进入项目培养阶段</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="stories">
+                <div class="container">
+                    <div class="section-heading reveal">
+                        <div class="eyebrow">学员故事</div>
+                        <h2>很多人不是没能力，只是一直没有找到一个值得全力切入的新方向</h2>
+                        <p>
+                            有人从待业状态切进来，有人从传统岗位转进来，也有人在迷茫里重新找到方向。
+                            真正改变他们的，不是运气，而是抓住了 AI 内容行业正在起势的这段窗口期。
+                        </p>
+                    </div>
+                    <div class="stories-note reveal">以下为项目学员成长案例示意。</div>
+
+                    <div class="stories-grid">
+                        <article class="story-card reveal">
+                            <div class="story-photo">
+                                <img src="assets/images/person-02.png" alt="林然照片">
+                            </div>
+                            <div class="story-body">
+                                <div class="story-meta">
+                                    <div>
+                                        <h3>林然</h3>
+                                        <span>23 岁 · 汉语言专业 · 成都</span>
+                                    </div>
+                                    <div class="story-tag">转行入局</div>
+                                </div>
+                                <p class="story-quote">
+                                    以前做内容运营，想转到更有增长空间的方向，但不会画、不会剪，也没有影视背景。进入速成班后，
+                                    她先把分镜和角色一致性练扎实，再在项目培养期里负责连续镜头片段，三个月后已经能独立扛一个小段落。
+                                </p>
+                                <div class="story-stats">
+                                    <div class="story-stat">
+                                        <strong>入班前</strong>
+                                        <span>仅有内容文案经验</span>
+                                    </div>
+                                    <div class="story-stat">
+                                        <strong>项目期角色</strong>
+                                        <span>镜头执行 + 素材整合</span>
+                                    </div>
+                                    <div class="story-stat">
+                                        <strong>阶段成果</strong>
+                                        <span>可独立完成标准片段</span>
+                                    </div>
+                                    <div class="story-stat">
+                                        <strong>下一目标</strong>
+                                        <span>进入组长储备序列</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="story-card reveal">
+                            <div class="story-photo">
+                                <img src="assets/images/person-03.png" alt="周衡照片">
+                            </div>
+                            <div class="story-body">
+                                <div class="story-meta">
+                                    <div>
+                                        <h3>周衡</h3>
+                                        <span>26 岁 · 机械专业 · 重庆</span>
+                                    </div>
+                                    <div class="story-tag">零基础入门</div>
+                                </div>
+                                <p class="story-quote">
+                                    他的优势不是艺术背景，而是执行稳定、能复盘。速成训练阶段先补了镜头和美感，项目培养期则负责资产复用、
+                                    画面修正和批量处理，逐步从“会操作”变成“会提效”的人。
+                                </p>
+                                <div class="story-stats">
+                                    <div class="story-stat">
+                                        <strong>入班前</strong>
+                                        <span>无影视和设计经验</span>
+                                    </div>
+                                    <div class="story-stat">
+                                        <strong>项目期角色</strong>
+                                        <span>场景资产与效率优化</span>
+                                    </div>
+                                    <div class="story-stat">
+                                        <strong>阶段成果</strong>
+                                        <span>返工率显著下降</span>
+                                    </div>
+                                    <div class="story-stat">
+                                        <strong>下一目标</strong>
+                                        <span>负责小组流程管理</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="story-card reveal">
+                            <div class="story-photo">
+                                <img src="assets/images/person-01.png" alt="顾晓曼照片">
+                            </div>
+                            <div class="story-body">
+                                <div class="story-meta">
+                                    <div>
+                                        <h3>顾晓曼</h3>
+                                        <span>24 岁 · 大专 · 西安</span>
+                                    </div>
+                                    <div class="story-tag">从待业到稳定成长</div>
+                                </div>
+                                <p class="story-quote">
+                                    她原本没有清晰职业方向，但愿意投入训练。进入项目后，她在主管带教下不断修正镜头节奏和人物状态，
+                                    第六个月时已经能承担新人陪跑与基础质检工作，开始进入带人方向。
+                                </p>
+                                <div class="story-stats">
+                                    <div class="story-stat">
+                                        <strong>入班前</strong>
+                                        <span>待业，方向不清晰</span>
+                                    </div>
+                                    <div class="story-stat">
+                                        <strong>项目期角色</strong>
+                                        <span>成片整合 + 质检协助</span>
+                                    </div>
+                                    <div class="story-stat">
+                                        <strong>阶段成果</strong>
+                                        <span>参与带新人和复盘</span>
+                                    </div>
+                                    <div class="story-stat">
+                                        <strong>下一目标</strong>
+                                        <span>转入主管培养序列</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="fit">
+                <div class="container">
+                    <div class="section-heading reveal">
+                        <div class="eyebrow">适合人群</div>
+                        <h2>如果你不想继续原地消耗，这个方向值得你尽快认真了解</h2>
+                        <p>
+                            不是所有人都适合这条路，但如果你对未来收入、职业安全感和成长空间有更高要求，
+                            这类新岗位比很多传统岗位更值得提前占位。
+                        </p>
+                    </div>
+
+                    <div class="fit-grid">
+                        <article class="fit-card reveal">
+                            <h3>零基础想入行的人</h3>
+                            <p>没有动画、设计、影视背景也可以，但要有长期投入意愿，能接受高频训练与反复迭代。</p>
+                        </article>
+                        <article class="fit-card reveal">
+                            <h3>想从内容岗转型的人</h3>
+                            <p>如果你已经做过文案、短视频、剪辑、运营，会更容易理解镜头与叙事，也更容易进入状态。</p>
+                        </article>
+                        <article class="fit-card reveal">
+                            <h3>愿意走项目路径的人</h3>
+                            <p>这不是学完就结束，而是要进入项目、在真实交付中被要求、被打磨、被放大。</p>
+                        </article>
+                        <article class="fit-card reveal">
+                            <h3>想要长期成长的人</h3>
+                            <p>如果你只想找一个快钱机会，不一定适合；如果你想建立长期技能和团队位置，这条路更值得走。</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="apply">
+                <div class="container contact-grid">
+                    <div class="contact-panel reveal">
+                        <div class="eyebrow">报名与咨询</div>
+                        <h3>越早判断自己适不适合，越早赶上这一波 AI 内容岗位机会</h3>
+                        <p>
+                            预约沟通，不只是了解课程，更是尽快判断自己能不能切进这个行业、适合走哪条成长路径，以及该怎样更快进入状态。
+                        </p>
+
+                        <ul class="contact-list">
+                            <li>
+                                <strong>公司主体</strong>
+                                <span>成都丰羽未来信息技术有限公司</span>
+                            </li>
+                            <li>
+                                <strong>项目名称</strong>
+                                <span>百万AI动画大师速成班</span>
+                            </li>
+                            <li>
+                                <strong>适合人群</strong>
+                                <span>零基础转行、待业人群、内容岗位升级、想进入 AI 新职业赛道的人</span>
+                            </li>
+                            <li>
+                                <strong>咨询微信</strong>
+                                <span>Mr-lan1</span>
+                            </li>
+                        </ul>
+
+                        <div class="contact-actions">
+                            <a class="btn btn-primary" href="#apply-form">填写下方表单</a>
+                            <button class="btn btn-secondary btn-ghost" type="button" data-open-wechat>添加咨询微信</button>
+                        </div>
+
+                        <div class="disclaimer">
+                            名额采取筛选制，建议先添加咨询微信，优先了解课程安排、培养路径与入班要求。
+                        </div>
+                    </div>
+
+                    <div class="contact-panel reveal">
+                        <div class="apply-card">
+                            <h3>预约职业沟通</h3>
+                            <p>留下你的信息，我们会根据你的基础情况，给你更适合的学习与成长建议。</p>
+                            <form id="apply-form" onsubmit="return handleApply(event)">
+                                <div class="apply-row">
+                                    <label for="name">姓名</label>
+                                    <input id="name" name="name" placeholder="请输入你的姓名" required>
+                                </div>
+                                <div class="apply-row">
+                                    <label for="phone">手机号 / 微信号</label>
+                                    <input id="phone" name="phone" placeholder="请输入你的联系方式" required>
+                                </div>
+                                <div class="apply-row">
+                                    <label for="city">所在城市</label>
+                                    <input id="city" name="city" placeholder="例如：成都 / 重庆 / 西安">
+                                </div>
+                                <div class="apply-row">
+                                    <label for="background">目前状态</label>
+                                    <select id="background" name="background">
+                                        <option value="零基础转行">零基础转行</option>
+                                        <option value="待业中">待业中</option>
+                                        <option value="有相关经验">有相关经验</option>
+                                        <option value="在校 / 应届">在校 / 应届</option>
+                                    </select>
+                                </div>
+                                <div class="apply-row">
+                                    <label for="intro">补充说明</label>
+                                    <textarea id="intro" name="intro" placeholder="你为什么想进入 AI 动画短剧行业？你希望通过这次培养获得什么？"></textarea>
+                                </div>
+                                <button class="btn btn-primary" type="submit">提交并预约沟通</button>
+                            </form>
+                            <div class="disclaimer">
+                                提交后建议同步添加咨询微信，沟通效率更高。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="faq">
+                <div class="container">
+                    <div class="section-heading reveal">
+                        <div class="eyebrow">常见问题</div>
+                        <h2>你现在最关心的，也正是很多人报名前最在意的</h2>
+                        <p>
+                            如果你也在担心未来怎么选方向、学了能不能用、进来后有没有结果，这几条先看清楚。
+                        </p>
+                    </div>
+
+                    <div class="faq-list">
+                        <article class="faq-item reveal">
+                            <button class="faq-question" type="button">
+                                <strong>完全零基础，真的能进入这个行业吗？</strong>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">
+                                    可以。零基础不是问题，真正决定结果的是你愿不愿意投入时间、接受训练、反复打磨和持续提升。
+                                    很多人一开始也没有相关背景，但在正确路径里，成长速度会远比自己乱学更快。
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="faq-item reveal">
+                            <button class="faq-question" type="button">
+                                <strong>速成班结束后，会直接进入项目吗？</strong>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">
+                                    速成训练结束后，会根据学习表现、作业质量、执行力和整体匹配度进入后续培养安排。
+                                    表现越稳定，越容易更快进入项目环境。
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="faq-item reveal">
+                            <button class="faq-question" type="button">
+                                <strong>培养期补助和后续岗位是怎么理解的？</strong>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">
+                                    当前路径是先进入项目培养阶段，培养期按月补助，后续根据考核结果进入正式团队。
+                                    优秀者除了固定收入外，还会继续往组长、主管、项目提成方向发展。
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="faq-item reveal">
+                            <button class="faq-question" type="button">
+                                <strong>这个项目和普通培训班最大的区别是什么？</strong>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">
+                                    最大区别在于，这里不只是教你一点软件操作，而是围绕真实项目和真实岗位需求训练你。
+                                    从课程、作业、试片到后续培养和晋升，目标始终是让你真正具备进入行业的能力。
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="container">
+                    <div class="cta-banner reveal">
+                        <div>
+                            <h2>AI 新岗位不会一直等人，越早学会，越早吃到这一波职业红利。</h2>
+                            <p>先预约一次沟通，看看你是否适合尽快切进百万AI动画大师速成班。</p>
+                        </div>
+                        <a class="btn btn-primary" href="#apply">立即预约</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container footer-line">
+                <div>© 2026 成都丰羽未来信息技术有限公司 · 百万AI动画大师速成班</div>
+                <div>企业地址：成都办公室｜成都市高新区博雅城市广场D座1702室；泉州办公室｜泉州市晋江市百捷环球中心907室；莆田办公室｜莆田市仙游县AI科技园C09号</div>
+            </div>
+        </footer>
+
+        <div class="modal" id="wechat-modal" aria-hidden="true">
+            <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="wechat-modal-title">
+                <div class="modal-header">
+                    <h3 id="wechat-modal-title">添加咨询微信</h3>
+                    <button class="modal-close" type="button" aria-label="关闭弹窗" data-close-wechat>×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="wechat-hint">也可直接搜索微信号：Mr-lan1</div>
+                    <div class="wechat-qr-wrap">
+                        <img src="assets/images/wechat-qr.jpg" alt="咨询微信二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const revealNodes = document.querySelectorAll(".reveal");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        revealNodes.forEach((node) => observer.observe(node));
+
+        document.querySelectorAll(".faq-item").forEach((item) => {
+            const question = item.querySelector(".faq-question");
+            const answer = item.querySelector(".faq-answer");
+            const icon = item.querySelector(".faq-icon");
+
+            question.addEventListener("click", () => {
+                const isOpen = item.classList.contains("open");
+                document.querySelectorAll(".faq-item.open").forEach((openItem) => {
+                    openItem.classList.remove("open");
+                    openItem.querySelector(".faq-answer").style.maxHeight = null;
+                    openItem.querySelector(".faq-icon").textContent = "+";
+                });
+
+                if (!isOpen) {
+                    item.classList.add("open");
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                    icon.textContent = "−";
+                }
+            });
+        });
+
+        const wechatModal = document.getElementById("wechat-modal");
+        const openWechatButton = document.querySelector("[data-open-wechat]");
+        const closeWechatButton = document.querySelector("[data-close-wechat]");
+
+        function openWechatModal() {
+            wechatModal.classList.add("open");
+            wechatModal.setAttribute("aria-hidden", "false");
+            document.body.classList.add("modal-open");
+        }
+
+        function closeWechatModal() {
+            wechatModal.classList.remove("open");
+            wechatModal.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("modal-open");
+        }
+
+        openWechatButton.addEventListener("click", openWechatModal);
+        closeWechatButton.addEventListener("click", closeWechatModal);
+
+        wechatModal.addEventListener("click", (event) => {
+            if (event.target === wechatModal) {
+                closeWechatModal();
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && wechatModal.classList.contains("open")) {
+                closeWechatModal();
+            }
+        });
+
+        function handleApply(event) {
+            event.preventDefault();
+            alert("表单提交通道正在配置中，请先添加咨询微信：Mr-lan1");
+            return false;
+        }
+    </script>
+</body>
+</html>
