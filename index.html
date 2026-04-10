@@ -43,7 +43,9 @@
                 radial-gradient(circle at 85% 10%, rgba(217, 185, 121, 0.14), transparent 30%),
                 linear-gradient(180deg, #07101e 0%, #0a1324 38%, #08111f 100%);
             min-height: 100vh;
+            min-height: 100dvh;
             line-height: 1.65;
+            -webkit-text-size-adjust: 100%;
         }
 
         a {
@@ -784,16 +786,23 @@
 
         .contact-grid {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(340px, 0.9fr);
-            gap: 24px;
+            grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+            gap: 28px;
+            align-items: start;
         }
 
         .contact-panel {
             background: linear-gradient(180deg, rgba(16, 34, 62, 0.92), rgba(9, 19, 35, 0.94));
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 28px;
-            padding: 30px;
+            padding: 34px;
             box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-panel > .eyebrow {
+            margin-bottom: 14px;
         }
 
         .contact-panel h3 {
@@ -843,7 +852,37 @@
 
         .apply-card {
             display: grid;
+            gap: 18px;
+        }
+
+        .apply-header {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 6px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .apply-header h3 {
+            font-size: 28px;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .apply-header p {
+            color: #adbed6;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        #apply-form {
+            display: grid;
             gap: 16px;
+        }
+
+        #apply-form button[type="submit"] {
+            margin-top: 6px;
+            width: 100%;
         }
 
         .apply-row {
@@ -866,8 +905,49 @@
             color: #eef4ff;
             padding: 14px 16px;
             font: inherit;
+            font-size: 16px;
             outline: none;
             transition: border-color 0.2s ease, background 0.2s ease;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .apply-row select {
+            background-image: linear-gradient(45deg, transparent 50%, #9db0ce 50%), linear-gradient(135deg, #9db0ce 50%, transparent 50%);
+            background-position: calc(100% - 22px) 22px, calc(100% - 16px) 22px;
+            background-size: 6px 6px, 6px 6px;
+            background-repeat: no-repeat;
+            padding-right: 40px;
+        }
+
+        .form-status {
+            margin-top: 12px;
+            padding: 12px 14px;
+            border-radius: 14px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .form-status.show {
+            display: block;
+        }
+
+        .form-status.success {
+            background: rgba(111, 208, 215, 0.12);
+            border: 1px solid rgba(111, 208, 215, 0.3);
+            color: #8fe1e7;
+        }
+
+        .form-status.error {
+            background: rgba(255, 120, 120, 0.1);
+            border: 1px solid rgba(255, 120, 120, 0.28);
+            color: #ffb0b0;
+        }
+
+        button[disabled] {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
         }
 
         .apply-row input:focus,
@@ -1102,14 +1182,42 @@
             .nav {
                 flex-wrap: wrap;
                 padding: 14px 0;
+                min-height: 0;
+                gap: 12px;
             }
 
             .nav-links {
                 order: 3;
                 width: 100%;
                 justify-content: space-between;
-                gap: 14px;
+                gap: 10px;
                 flex-wrap: wrap;
+                font-size: 13px;
+            }
+
+            .nav-links li {
+                flex: 1 1 auto;
+                text-align: center;
+            }
+
+            .brand-mark {
+                width: 42px;
+                height: 42px;
+                border-radius: 14px;
+                font-size: 14px;
+            }
+
+            .brand-name {
+                font-size: 14px;
+            }
+
+            .brand-subtitle {
+                font-size: 11px;
+            }
+
+            .nav .btn-primary {
+                padding: 10px 16px;
+                font-size: 13px;
             }
 
             .hero-grid,
@@ -1133,12 +1241,27 @@
                 padding-top: 34px;
             }
 
+            .hero-card {
+                padding: 22px;
+                border-radius: 26px;
+            }
+
+            .hero h1 {
+                font-size: clamp(32px, 8vw, 46px);
+            }
+
             .cta-banner {
                 padding: 26px;
+                text-align: center;
             }
 
             .cta-banner .btn {
                 width: 100%;
+            }
+
+            .footer-line {
+                flex-direction: column;
+                gap: 12px;
             }
         }
 
@@ -1147,12 +1270,40 @@
                 width: min(var(--container), calc(100% - 26px));
             }
 
+            section {
+                padding: 56px 0;
+            }
+
             .brand-name {
                 white-space: normal;
+                line-height: 1.25;
+            }
+
+            .hero {
+                padding: 28px 0 24px;
             }
 
             .hero h1 {
-                letter-spacing: -0.05em;
+                font-size: clamp(28px, 8.5vw, 38px);
+                letter-spacing: -0.03em;
+                margin: 14px 0 14px;
+            }
+
+            .hero-lead {
+                font-size: 15px;
+                line-height: 1.8;
+            }
+
+            .hero-actions .btn {
+                flex: 1 1 100%;
+            }
+
+            .section-heading h2 {
+                font-size: clamp(24px, 6.5vw, 34px);
+            }
+
+            .section-heading p {
+                font-size: 15px;
             }
 
             .panel,
@@ -1161,12 +1312,95 @@
             .story-body,
             .curriculum-card,
             .path-card,
-            .fit-card {
+            .fit-card,
+            .trust-card {
+                padding: 20px;
+            }
+
+            .panel h3,
+            .contact-panel h3 {
+                font-size: 22px;
+            }
+
+            .card-title {
+                font-size: 24px;
+            }
+
+            .stat-box strong {
+                font-size: 24px;
+            }
+
+            .metric-box strong {
+                font-size: 28px;
+            }
+
+            .nav-links {
+                gap: 6px;
+                font-size: 12px;
+            }
+
+            .modal-dialog {
+                border-radius: 22px;
+            }
+
+            .wechat-qr-wrap img {
+                max-width: 240px;
+                margin: 0 auto;
+            }
+
+            .faq-question {
+                padding: 16px 18px;
+            }
+
+            .faq-question strong {
+                font-size: 15px;
+            }
+
+            .faq-answer-inner {
+                font-size: 14px;
+                padding: 0 18px 18px;
+            }
+
+            .cta-banner {
                 padding: 22px;
             }
 
-            section {
-                padding: 60px 0;
+            .cta-banner h2 {
+                font-size: clamp(22px, 6vw, 30px);
+            }
+        }
+
+        @media (max-width: 420px) {
+            .container {
+                width: calc(100% - 22px);
+            }
+
+            .brand-name {
+                font-size: 13px;
+            }
+
+            .nav .btn-primary {
+                padding: 9px 14px;
+                font-size: 12px;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .hero-point {
+                padding: 14px 16px;
+            }
+
+            .model-item {
+                grid-template-columns: 44px 1fr;
+                padding: 16px;
+            }
+
+            .model-index {
+                width: 44px;
+                height: 44px;
+                font-size: 14px;
             }
         }
     </style>
@@ -1703,7 +1937,6 @@
                         </ul>
 
                         <div class="contact-actions">
-                            <a class="btn btn-primary" href="#apply-form">填写下方表单</a>
                             <button class="btn btn-secondary btn-ghost" type="button" data-open-wechat>添加咨询微信</button>
                         </div>
 
@@ -1714,8 +1947,11 @@
 
                     <div class="contact-panel reveal">
                         <div class="apply-card">
-                            <h3>预约职业沟通</h3>
-                            <p>留下你的信息，我们会根据你的基础情况，给你更适合的学习与成长建议。</p>
+                            <div class="apply-header">
+                                <div class="eyebrow">填写信息</div>
+                                <h3>预约职业沟通</h3>
+                                <p>留下你的信息，我们会根据你的基础情况，给你更适合的学习与成长建议。</p>
+                            </div>
                             <form id="apply-form" onsubmit="return handleApply(event)">
                                 <div class="apply-row">
                                     <label for="name">姓名</label>
@@ -1723,7 +1959,7 @@
                                 </div>
                                 <div class="apply-row">
                                     <label for="phone">手机号 / 微信号</label>
-                                    <input id="phone" name="phone" placeholder="请输入你的联系方式" required>
+                                    <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="请输入你的联系方式" required>
                                 </div>
                                 <div class="apply-row">
                                     <label for="city">所在城市</label>
@@ -1742,7 +1978,8 @@
                                     <label for="intro">补充说明</label>
                                     <textarea id="intro" name="intro" placeholder="你为什么想进入 AI 动画短剧行业？你希望通过这次培养获得什么？"></textarea>
                                 </div>
-                                <button class="btn btn-primary" type="submit">提交并预约沟通</button>
+                                <button class="btn btn-primary" type="submit" id="apply-submit">提交并预约沟通</button>
+                                <div class="form-status" id="apply-status" role="status" aria-live="polite"></div>
                             </form>
                             <div class="disclaimer">
                                 提交后建议同步添加咨询微信，沟通效率更高。
@@ -1919,9 +2156,71 @@
             }
         });
 
-        function handleApply(event) {
+        // 表单 AJAX 提交
+        // 通过 FormSubmit (https://formsubmit.co) 中转到目标邮箱，无需后端
+        // 首次提交后，目标邮箱会收到一封激活邮件，点击其中链接激活后即可正常接收所有报名信息
+        const APPLY_ENDPOINT = "https://formsubmit.co/ajax/18030355222@qq.com";
+
+        function setApplyStatus(message, type) {
+            const statusEl = document.getElementById("apply-status");
+            statusEl.textContent = message;
+            statusEl.classList.remove("success", "error");
+            if (type) statusEl.classList.add(type);
+            statusEl.classList.add("show");
+        }
+
+        async function handleApply(event) {
             event.preventDefault();
-            alert("表单提交通道正在配置中，请先添加咨询微信：Mr-lan1");
+            const form = event.target;
+            const submitBtn = document.getElementById("apply-submit");
+            const originalText = submitBtn.textContent;
+
+            const data = {
+                姓名: form.name.value.trim(),
+                联系方式: form.phone.value.trim(),
+                所在城市: form.city.value.trim() || "未填写",
+                目前状态: form.background.value,
+                补充说明: form.intro.value.trim() || "未填写",
+                _subject: "【百万AI动画大师速成班】新报名咨询",
+                _captcha: "false",
+                _template: "table"
+            };
+
+            if (!data.姓名 || !data.联系方式) {
+                setApplyStatus("请填写姓名和联系方式", "error");
+                return false;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = "正在提交...";
+            setApplyStatus("正在提交，请稍候...", "");
+
+            try {
+                const res = await fetch(APPLY_ENDPOINT, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await res.json().catch(() => ({}));
+
+                if (res.ok && (result.success === "true" || result.success === true)) {
+                    setApplyStatus("提交成功！我们会尽快与你联系，建议同步添加咨询微信 Mr-lan1。", "success");
+                    form.reset();
+                } else {
+                    throw new Error(result.message || "提交失败");
+                }
+            } catch (err) {
+                console.error("[apply] submit failed:", err);
+                setApplyStatus("提交失败，请稍后再试，或直接添加咨询微信 Mr-lan1。", "error");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+
             return false;
         }
     </script>
